@@ -1,0 +1,46 @@
+type Query {
+  activeGames: [Game]
+  players: [Player]
+  player(id: ID!): Player
+  game(id: ID!): Game
+}
+
+type Mutation {
+  createGame(playerIds: [Int!]): Game
+  playCards(gameId: Int!, playerId: Int!, cardIds: [Int!]): Game
+  createPlayer(createPlayerInput: CreatePlayerInput): Player
+}
+
+type Subscription {
+  lastPlayCards: [Card!]
+}
+
+type Game {
+    id: Int!
+    playerInGames: [PlayerInGame!]
+    lastPlayCards: [Card!]
+    cardRemain: Int!
+    whosNext: Player
+}
+
+type Player {
+  id: Int!
+  name: String!
+}
+
+type PlayerInGame {
+  id: Int!
+  name: String!
+  cards: [Card!]
+}
+
+type Card {
+  id: Int!
+  name: String!
+}
+"""
+Test comment
+"""
+input CreatePlayerInput {
+  name: String
+}
